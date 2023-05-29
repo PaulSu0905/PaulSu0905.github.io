@@ -41,3 +41,8 @@ button:hover{
     background-color:#fff;
     border:2px #003C9D solid;
 }
+result{
+    font-size: 30px;
+    font-weight: bolder;
+    color: rgb(0, 93, 96);
+}
