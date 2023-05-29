@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>樂透遊戲機</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <link rel="stylesheet" href="mystyle.css"><!--css-->
+    <meta name="author" content="蘇若新">
+    <meta name="studentID" content="110403542">
+    <meta name="keywords" content="樂透遊戲機">
+    <meta name="discription" content="樂透遊戲機">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"><!--畫面之scale方便在不同尺寸螢幕呈現-->
+</head>
+<body>
+    <img src="img/lo.png">
+    <h1>樂透遊戲機</h1>
+    <p>請輸入3個介於1-10的數字：</p>
+    <input type="number" id="guess1">
+    <input type="number" id="guess2">
+    <input type="number" id="guess3">
+    <button onclick="myFunction()">開獎</button>
+    <button onclick="reset()">重新開始</button>
+    <br>
+    <p id="result"></p>
+
+    <script>
+        let  count=0;
+        var luckynum = randomnum();
+        //生成隨機變數
+        function randomnum(){
+            var lottery = [];
+            var n;
+            while (lottery.length <3){
+                //隨機選出1~10之間的數字
+                n = Math.floor(Math.random()*10)+1;
+                //如果選出來的n不存在，就放入lottery陣列中
+                if(lottery.indexOf(n) === -1){
+                    lottery.push(n)
+                }
+            }
+            return lottery;
+        }
+        //開獎方法
+        function myFunction(){
+            var input1=document.getElementById("guess1").value
+            var input2=document.getElementById("guess2").value
+            var input3=document.getElementById("guess3").value
+            let text;
+            if(!isNaN(input1) && input1 !== ''){
+                if(!isNaN(input2) && input2 !== ''){
+                    if(!isNaN(input3) && input3 !== ''){
+                        if(luckynum.indexOf(0,input1)!==-1){
+                            count=count+1;
+                        }
+                        if(luckynum.indexOf(0,input2)!==-1){
+                            count=count+1;
+                        }
+                        if(luckynum.indexOf(0,input3)!==-1){
+                            count=count+1;
+                        }
+                        if(count===1){
+                            text='恭喜猜中一個號碼，獲得參獎獎金為100000元';
+                        }
+                        if(count===2){
+                            text='恭喜猜中兩個號碼，獲得貳獎獎金為1000000元';
+                        }
+                        if(count===3){
+                            text='恭喜猜中三個號碼，獲得頭獎獎金為10000000元';
+                        }
+                        if(count===0){
+                            text='未中獎請重新開始！';
+                            reset();
+                        }
+                    }
+                    else{
+                        alert("請輸入有效數字")
+                        reset();
+                    }
+                }
+                else{
+                        alert("請輸入有效數字")
+                        reset();
+                    }
+            }
+            else{
+                alert("請輸入有效數字");
+                reset();
+            }
+            document.getElementById("result").innerHTML=text;
+        }
+        //reset方法
+        function reset(){
+            document.getElementById("guess1").value="";
+            document.getElementById("guess2").value="";
+            document.getElementById("guess3").value="";
+            document.getElementById("result").innerHTML="";
+            luckynum=randomnum();
+            count=0;
+
+        }
+    </script>
+</body>
+</html>
+
